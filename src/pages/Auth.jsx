@@ -13,11 +13,20 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Auth = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    });
+  };
   return (
     <Box>
       <Center h={"100Vh"} w={"100vw"} bg={"#f9f6fd"}>
@@ -35,6 +44,7 @@ const Auth = () => {
                   type={"email"}
                   borderColor={"gray.300"}
                   placeholder="Enter email"
+                  ref={emailRef}
                 />
               </Box>
               <Box>
@@ -45,6 +55,7 @@ const Auth = () => {
                     type={show ? "text" : "password"}
                     placeholder="Enter password"
                     borderColor={"gray.300"}
+                    ref={passwordRef}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -59,7 +70,12 @@ const Auth = () => {
                 </Flex>
                 <Link>Forget Password?</Link>
               </Flex>
-              <Button bg={"#6a2cd8"} color={"#fff"} _hover={{ bg: "#7830f5" }}>
+              <Button
+                bg={"#6a2cd8"}
+                color={"#fff"}
+                _hover={{ bg: "#7830f5" }}
+                onClick={(e) => handleSubmit(e)}
+              >
                 Sign In
               </Button>
               <Text>
