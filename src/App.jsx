@@ -1,9 +1,30 @@
-import Auth from "./pages/Auth";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import RouterPage from "./pages/RouterPage";
+import OrderPage from "./pages/OrderPage";
+import CookPage from "./pages/CookPage";
+import BillingPage from "./pages/BillingPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <>
-      <Auth />
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+        <Route path="signup" element={<SignUpPage />} />
+        <Route path="rms" element={<RouterPage />}>
+          <Route path="home" element={<HomePage />} />
+          <Route path="order" element={<OrderPage />} />
+          <Route path="cook" element={<CookPage />} />
+          <Route path="billing" element={<BillingPage />} />
+        </Route>
+      </Routes>
     </>
   );
 }
