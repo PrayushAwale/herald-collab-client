@@ -4,11 +4,12 @@ const Loader = () => {
   return (
     <Center
       h={"100vh"}
-      w={"100vw"}
+      w={"100%"}
       bg={"rgba(255,255,255,0.8)"}
       position={"absolute"}
       top={0}
       left={0}
+      zIndex={3}
     >
       <VStack>
         <Spinner

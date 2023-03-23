@@ -12,7 +12,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { updateAmount, onChangeInput } from "../features/orderSlice";
 
-const SideCartList = ({ item_name, priceInt, amount, id }) => {
+const SideCartList = ({
+  food_name: item_name,
+  price: priceInt,
+  quantity: amount,
+  id,
+}) => {
   const dispatch = useDispatch();
   return (
     <Flex gap={"1rem"} align={"center"}>

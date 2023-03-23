@@ -15,45 +15,48 @@ import {
   StackDivider,
 } from "@chakra-ui/react";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SideCartList from "./SideCartList";
+import { setLoader } from "../features/loaderSlice";
+import { emptyCart } from "../features/orderSlice";
 
 const SideCart = () => {
-  const { cartItem, table_number } = useSelector((state) => state.order);
-  let isFirstTime = true;
+  const { cartItem } = useSelector((state) => state.order);
   const toast = useToast();
+  const dispatch = useDispatch();
   const handleOrder = async () => {
+    dispatch(setLoader());
     try {
-      cartItem.forEach((item) => {
-        const body = {
-          description: "I like MOMO",
-          food_item: item.item_name,
-          quantity: item.amount,
-          price: item.priceInt,
-          table_number: 11,
+      const body = cartItem.map((item) => {
+        return {
+          price: item.price,
+          food_name: item.food_name,
+          quantity: item.quantity,
+          description: item.description,
+          table_number: item.table_number,
+          isCompleted: item.isCompleted,
         };
-        const fetcher = async () => {
-          const response = await fetch("http://localhost:8800/placeorder", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          });
-          if (response.ok && isFirstTime) {
-            toast({
-              title: "Ordered Sucessfully.",
-              description: "Sucessfully placed the order.",
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-            });
-            isFirstTime = !isFirstTime;
-          } else {
-            throw new Error("Cannot place the order.");
-          }
-        };
-        fetcher();
       });
+      const response = await fetch("http://localhost:5500/order/placeorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        dispatch(emptyCart());
+        toast({
+          title: "Ordered Sucessfully.",
+          description: "Sucessfully placed the order.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        dispatch(setLoader());
+      } else {
+        throw new Error("Cannot place the order.");
+      }
     } catch (error) {
+      dispatch(setLoader());
       toast({
         title: "Ordered Unsucessfully.",
         description: error.message,
@@ -76,7 +79,7 @@ const SideCart = () => {
         <Flex align={"center"} gap={"0.8rem"}>
           <Text>Table No.</Text>
           <NumberInput
-            value={table_number}
+            value={10}
             onInput={(e) => {
               dispatch(onChangeInput({ id, value: e.target.value }));
             }}

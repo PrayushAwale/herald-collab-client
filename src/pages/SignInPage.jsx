@@ -9,8 +9,18 @@ const SignInPage = () => {
 
   return (
     <Box position={"relative"}>
-      <Center h={"100Vh"} w={"100vw"} bg={"#f9f6fd"}>
+      <Center h={"100Vh"} w={"100vw"} bg={"#f9f6fd"} position={"relative"}>
+        <Box
+          position={"absolute"}
+          top={0}
+          left={0}
+          h={"100vh"}
+          w={"100%"}
+          opacity={0.06}
+          bgImage={"/img/patternBG.png"}
+        ></Box>
         <Flex
+          zIndex={1}
           align={"center"}
           gap={"3rem"}
           bg={"#fff"}
@@ -18,7 +28,7 @@ const SignInPage = () => {
           borderRadius={"1rem"}
           boxShadow={"0px 10px 15px -3px rgba(0,0,0,0.1)"}
         >
-          <Image src={"./img/login.png"} maxW={"25rem"} />
+          <Image src={"/img/login.png"} maxW={"25rem"} />
           <SignIn />
         </Flex>
       </Center>

@@ -17,6 +17,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoader } from "../features/loaderSlice";
+import { useToast } from "@chakra-ui/react";
 
 const SignIn = () => {
   const [data, setData] = useState("");
@@ -26,6 +27,7 @@ const SignIn = () => {
   const passwordRef = useRef();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const toast = useToast();
   const handleSubmit = async (e) => {
     dispatch(setLoader());
     e.preventDefault();
@@ -42,7 +44,7 @@ const SignIn = () => {
 
       if (response.ok) {
         dispatch(setLoader());
-        navigate("rms/order");
+        navigate("/rms/order");
         return;
       }
       setData(await response.json());
@@ -50,19 +52,38 @@ const SignIn = () => {
     } catch (err) {
       dispatch(setLoader());
       console.error(err.message);
+      toast({
+        title: "Unable Log In",
+        description: "There was some problem while logging in",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   return (
     <>
       <FormControl>
         <VStack align={"stretch"} spacing={"2rem"} w={"25rem"}>
-          <Heading fontSize={"2rem"}>
+          <Heading fontSize={"1.5rem"} textTransform={"uppercase"}>
             Never miss an{" "}
-            <Text as={"span"} color={"#ffae7c"}>
+            <Text
+              as={"span"}
+              color={"#ffae7c"}
+              bgGradient="linear(to-l, #ffc6a2, #ff873d)"
+              bgClip="text"
+              fontWeight="extrabold"
+            >
               update
             </Text>{" "}
             With our{" "}
-            <Text as={"span"} color={"#ffae7c"}>
+            <Text
+              as={"span"}
+              color={"#ffae7c"}
+              bgGradient="linear(to-r, #ffc6a2, #ff873d)"
+              bgClip="text"
+              fontWeight="extrabold"
+            >
               prompt
             </Text>{" "}
             services.

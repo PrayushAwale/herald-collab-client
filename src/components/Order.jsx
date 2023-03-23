@@ -23,7 +23,7 @@ const Order = () => {
     borderRadius: "5rem",
   };
   return (
-    <Box w={"100%"} px={"2rem"}>
+    <Box w={"100%"} px={"2rem"} position={"relative"}>
       <Box w={"100%"}>
         <HStack py={"1.8rem"}>
           <Input

@@ -21,10 +21,13 @@ const OrderList = ({ item_name, price, id }) => {
         }
         dispatch(
           addIntoCart({
-            item_name,
-            priceInt,
+            food_name: item_name,
+            price: priceInt,
             id,
-            amount: 1,
+            quantity: 1,
+            table_number: 1,
+            description: "Empty For Now",
+            isCompleted: false,
           })
         );
       }}

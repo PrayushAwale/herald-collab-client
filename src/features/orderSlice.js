@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  table_number: 1,
-  description: "",
   cartItem: [],
 };
 
@@ -10,6 +8,9 @@ const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
+    emptyCart: (state, action) => {
+      state.cartItem = [];
+    },
     addIntoCart: (state, action) => {
       const newItem = action.payload;
       state.cartItem = [...state.cartItem, newItem];
@@ -18,7 +19,7 @@ const orderSlice = createSlice({
       const id = action.payload;
       const newArray = state.cartItem.map((item) => {
         if (item.id === id) {
-          item.amount = item.amount + 1;
+          item.quantity = item.quantity + 1;
         }
         return item;
       });
@@ -29,7 +30,7 @@ const orderSlice = createSlice({
       if (increment) {
         const newArray = state.cartItem.map((item) => {
           if (item.id === id) {
-            item.amount = item.amount + 1;
+            item.quantity = item.quantity + 1;
           }
           return item;
         });
@@ -39,7 +40,7 @@ const orderSlice = createSlice({
         const { value } = action.payload;
         const newArray = state.cartItem.map((item) => {
           if (item.id === id) {
-            item.amount = value;
+            item.quantity = value;
           }
           return item;
         });
@@ -47,10 +48,10 @@ const orderSlice = createSlice({
       } else {
         const newArray = state.cartItem.map((item) => {
           if (item.id === id) {
-            if (item.amount <= 0) {
+            if (item.quantity <= 0) {
               return item;
             }
-            item.amount = item.amount - 1;
+            item.quantity = item.quantity - 1;
           }
           return item;
         });
@@ -61,7 +62,7 @@ const orderSlice = createSlice({
       const { id, value } = action.payload;
       const newArray = state.cartItem.map((item) => {
         if (item.id === id) {
-          item.amount = Number(value);
+          item.quantity = Number(value);
         }
         return item;
       });
@@ -71,5 +72,5 @@ const orderSlice = createSlice({
 });
 
 export default orderSlice.reducer;
-export const { addIntoCart, amount, updateAmount, onChangeInput } =
+export const { addIntoCart, amount, updateAmount, onChangeInput, emptyCart } =
   orderSlice.actions;

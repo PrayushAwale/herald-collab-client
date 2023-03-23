@@ -13,7 +13,10 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { setLoader } from "../features/loaderSlice";
+import { useToast } from "@chakra-ui/react";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -22,21 +25,54 @@ const SignUp = () => {
   const phoneNumberRef = useRef();
   const passwordRef = useRef();
   const [show, setShow] = useState(false);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = () => setShow(!show);
-  const handleSubmit = (e) => {
+  const toast = useToast();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    });
+    try {
+      dispatch(setLoader());
+      const body = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        username: usernameRef.current.value,
+        restaurant_name: companyNameRef.current.value,
+        phone_number: phoneNumberRef.current.value,
+      };
+      const response = await fetch("http://localhost:5500/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        dispatch(setLoader());
+        navigate("/rms/order");
+        return;
+      }
+    } catch (err) {
+      dispatch(setLoader());
+      console.error(err);
+      toast({
+        title: "Unable to create Account",
+        description: "There was some problem while creating account",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
   return (
     <>
       <FormControl>
         <VStack align={"stretch"} spacing={"1.5rem"} w={"25rem"}>
           <Box>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>
+              Email
+              <Text as={"span"} color={"red"}>
+                *
+              </Text>
+            </FormLabel>
             <Input
               type={"email"}
               borderColor={"gray.300"}
@@ -45,7 +81,12 @@ const SignUp = () => {
             />
           </Box>
           <Box>
-            <FormLabel>Username</FormLabel>
+            <FormLabel>
+              Username
+              <Text as={"span"} color={"red"}>
+                *
+              </Text>
+            </FormLabel>
             <Input
               type={"text"}
               borderColor={"gray.300"}
@@ -54,7 +95,12 @@ const SignUp = () => {
             />
           </Box>
           <Box>
-            <FormLabel>Company Name</FormLabel>
+            <FormLabel>
+              Company Name
+              <Text as={"span"} color={"red"}>
+                *
+              </Text>
+            </FormLabel>
             <Input
               type={"text"}
               borderColor={"gray.300"}
@@ -63,7 +109,12 @@ const SignUp = () => {
             />
           </Box>
           <Box>
-            <FormLabel>Phone Number</FormLabel>
+            <FormLabel>
+              Phone Number
+              <Text as={"span"} color={"red"}>
+                *
+              </Text>
+            </FormLabel>
             <Input
               type={"text"}
               borderColor={"gray.300"}
@@ -72,7 +123,12 @@ const SignUp = () => {
             />
           </Box>
           <Box>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>
+              Password
+              <Text as={"span"} color={"red"}>
+                *
+              </Text>
+            </FormLabel>
             <InputGroup size="md">
               <Input
                 pr="4.5rem"
