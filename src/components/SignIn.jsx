@@ -5,6 +5,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   InputGroup,
   InputRightElement,
@@ -55,6 +56,17 @@ const SignIn = () => {
     <>
       <FormControl>
         <VStack align={"stretch"} spacing={"2rem"} w={"25rem"}>
+          <Heading fontSize={"2rem"}>
+            Never miss an{" "}
+            <Text as={"span"} color={"#ffae7c"}>
+              update
+            </Text>{" "}
+            With our{" "}
+            <Text as={"span"} color={"#ffae7c"}>
+              prompt
+            </Text>{" "}
+            services.
+          </Heading>
           <Box>
             <Text color={"red"} textAlign={"center"}>
               {data && data.message}

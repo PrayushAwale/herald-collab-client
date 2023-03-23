@@ -52,7 +52,7 @@ const SideBar = () => {
     >
       <Flex flexDirection={"column"} gap={"1rem"}>
         <Flex align={"center"} justify={"center"} gap={"1rem"} p={"0.5rem"}>
-          <Image src="./img/restaurant (2).png" h={"4rem"} w={"4rem"} />
+          <Image src="/img/logo.png" h={"4rem"} w={"4rem"} />
           <Heading fontSize={"2rem"} fontWeight={400}>
             RMS
           </Heading>

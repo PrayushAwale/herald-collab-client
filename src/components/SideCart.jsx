@@ -137,7 +137,7 @@ const SideCart = () => {
               </Button>
             </VStack>
           ) : (
-            <Image src="./img/empty-box.png" />
+            <Image src="/img/empty-box.png" />
           )}
         </Box>
       </Box>
