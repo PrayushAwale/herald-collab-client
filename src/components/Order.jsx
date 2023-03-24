@@ -9,11 +9,13 @@ import {
   Link,
   Divider,
   StackDivider,
+  IconButton,
 } from "@chakra-ui/react";
 import React from "react";
 import { data } from "../data";
 import OrderList from "./OrderList";
 import SideCart from "./SideCart";
+import SearchandHeader from "./SearchandHeader";
 
 const Order = () => {
   const categoryLink = {
@@ -23,20 +25,8 @@ const Order = () => {
     borderRadius: "5rem",
   };
   return (
-    <Box w={"100%"} px={"2rem"} position={"relative"}>
-      <Box w={"100%"}>
-        <HStack py={"1.8rem"}>
-          <Input
-            type={"text"}
-            placeholder={"Search for the Food"}
-            bg={"#fff"}
-          />
-          <Button bg={"#fdb78b"} _hover={{ bg: "#ffd0b4" }}>
-            Search
-          </Button>
-        </HStack>
-      </Box>
-
+    <Box w={"100%"} px={"2rem"} position={"relative"} pt={"7rem"}>
+      <SearchandHeader />
       <Box as="section" h={"100vh"} w={"100%"} bg={"#fff"}>
         <Heading mb={"1rem"}>Categories</Heading>
         <Flex align={"center"} gap={"1rem"} mb={"0.8rem"}>

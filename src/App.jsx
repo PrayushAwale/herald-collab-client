@@ -11,20 +11,24 @@ import OrderPage from "./pages/OrderPage";
 import CookPage from "./pages/CookPage";
 import BillingPage from "./pages/BillingPage";
 import HomePage from "./pages/HomePage";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <>
-      <Routes>
-        <Route path="/" element={<SignInPage />} />
-        <Route path="signup" element={<SignUpPage />} />
-        <Route path="rms" element={<RouterPage />}>
-          <Route path="home" element={<HomePage />} />
-          <Route path="order" element={<OrderPage />} />
-          <Route path="cook" element={<CookPage />} />
-          <Route path="billing" element={<BillingPage />} />
-        </Route>
-      </Routes>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" element={<SignInPage />} />
+          <Route path="signup" element={<SignUpPage />} />
+          <Route path="rms" element={<RouterPage />}>
+            <Route path="home" element={<HomePage />} />
+            <Route path="order" element={<OrderPage />} />
+            <Route path="cook" element={<CookPage />} />
+            <Route path="billing" element={<BillingPage />} />
+          </Route>
+        </Routes>
+      </QueryClientProvider>
     </>
   );
 }
