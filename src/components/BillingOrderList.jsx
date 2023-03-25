@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 
-const CookOrderList = ({
+const BillingOrderList = ({
   food_name,
   price,
   isCompleted,
@@ -9,22 +9,21 @@ const CookOrderList = ({
   id,
   quantity,
 }) => {
-  const [isDone, setIsDone] = useState(false);
   const handleUpdate = async () => {
-    setIsDone(!isDone);
-    try {
-      const body = {
-        id,
-        isCompleted: !isCompleted,
-      };
-      const response = await fetch("http://localhost:5500/order/updateorder", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-    } catch (err) {
-      console.error(err.message);
-    }
+    // try {
+    //   const body = {
+    //     id,
+    //     isCompleted: !isCompleted,
+    //   };
+    //   const response = await fetch("http://localhost:5500/order/updateorder", {
+    //     method: "PUT",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(body),
+    //   });
+    // } catch (err) {
+    //   console.error(err.message);
+    // }
+    console.log("Hello");
   };
   return (
     <Box
@@ -44,12 +43,12 @@ const CookOrderList = ({
           <Text> {table_number} </Text>
           <Text
             p={"0.1rem 0.8rem"}
-            bg={isDone ? "green" : "red.500"}
+            bg={isCompleted ? "green" : "red.500"}
             color={"#fff"}
             borderRadius={"1rem"}
           >
             {" "}
-            {isCompleted || isDone ? "Completed" : "Incomplete"}{" "}
+            {isCompleted ? "Completed" : "Incomplete"}{" "}
           </Text>
         </Flex>
       </Flex>
@@ -57,4 +56,4 @@ const CookOrderList = ({
   );
 };
 
-export default CookOrderList;
+export default BillingOrderList;

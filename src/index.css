@@ -24,3 +24,34 @@ input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;
 }
+
+.active {
+  background-color: #fff;
+}
+.active::after {
+  content: "";
+  height: 2rem;
+  width: 2rem;
+  /* background-color: red; */
+  position: absolute;
+  top: -57.8%;
+  right: 0;
+  border-bottom-right-radius: 40%;
+  box-shadow: 7.5px 7.5px 0 7.5px #fff;
+}
+
+.active::before {
+  content: "";
+  height: 2rem;
+  width: 2rem;
+  /* background-color: red; */
+  position: absolute;
+  bottom: -57.8%;
+  right: 0;
+  border-top-right-radius: 40%;
+  box-shadow: 7.5px -7.5px 0 7.5px #fff;
+}
+
+.active:hover {
+  background-color: #fff;
+}

@@ -3,8 +3,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BiLayer } from "react-icons/bi";
-
 // import "../Links.css";
+
 const SideBar = () => {
   const linkStyles = {
     after: {
