@@ -18,10 +18,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SideCartList from "./SideCartList";
 import { setLoader } from "../features/loaderSlice";
-import { emptyCart } from "../features/orderSlice";
+import {
+  emptyCart,
+  onChangeInput,
+  emptyTableNumber,
+} from "../features/orderSlice";
 
 const SideCart = () => {
-  const { cartItem } = useSelector((state) => state.order);
+  const { cartItem, tableNumber } = useSelector((state) => state.order);
   const toast = useToast();
   const dispatch = useDispatch();
   const handleOrder = async () => {
@@ -33,7 +37,7 @@ const SideCart = () => {
           food_name: item.food_name,
           quantity: item.quantity,
           description: item.description,
-          table_number: item.table_number,
+          table_number: Number(item.table_number),
           isCompleted: item.isCompleted,
         };
       });
@@ -43,6 +47,7 @@ const SideCart = () => {
         body: JSON.stringify(body),
       });
       if (response.ok) {
+        dispatch(emptyTableNumber());
         dispatch(emptyCart());
         toast({
           title: "Ordered Sucessfully.",
@@ -79,9 +84,9 @@ const SideCart = () => {
         <Flex align={"center"} gap={"0.8rem"}>
           <Text>Table No.</Text>
           <NumberInput
-            value={10}
+            value={tableNumber}
             onInput={(e) => {
-              dispatch(onChangeInput({ id, value: e.target.value }));
+              dispatch(onChangeInput({ value: e.target.value }));
             }}
           >
             <NumberInputField bg={"#fff"} width={"5rem"} />

@@ -149,6 +149,7 @@ const SignUp = () => {
             bg={"#fdb78b"}
             color={"#000"}
             _hover={{ bg: "#ffbf98" }}
+            boxShadow={"0px 5px 10px -3px rgba(0,0,0,0.1)"}
             onClick={(e) => handleSubmit(e)}
           >
             Sign Up

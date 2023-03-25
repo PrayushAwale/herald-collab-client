@@ -11,6 +11,7 @@ const BillingPage = () => {
   };
 
   const { data, error, isLoading } = useQuery("randomFacts", getFacts);
+  console.log(data);
   return (
     <Box h={"100vh"} bg={"#fff"}>
       <Box p={"2rem 5rem"}>

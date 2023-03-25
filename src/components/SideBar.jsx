@@ -1,6 +1,9 @@
 import { Box, Heading, Flex, Link, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { BiLayer } from "react-icons/bi";
+
 // import "../Links.css";
 const SideBar = () => {
   const linkStyles = {
@@ -60,16 +63,28 @@ const SideBar = () => {
         <Box fontWeight={500}>
           <Flex gap={"0.5rem"} flexDirection={"column"} w={"100%"} pl={"1rem"}>
             <Link as={NavLink} sx={linkStyles.link} to="home">
-              <Text>Home</Text>
+              <Flex align={"center"} gap={"0.5rem"}>
+                <AiOutlineDashboard size={"1.5rem"} />
+                <Text>Dashboard</Text>
+              </Flex>
             </Link>
             <Link as={NavLink} sx={linkStyles.link} to="cook">
-              <Text>Cook</Text>
+              <Flex align={"center"} gap={"0.5rem"}>
+                <Image src="/img/chef-hat.png" h={"1.5rem"} w={"1.5rem"} />
+                <Text>Cook</Text>
+              </Flex>
             </Link>
             <Link as={NavLink} sx={linkStyles.link} to="order">
-              <Text>Order</Text>
+              <Flex align={"center"} gap={"0.5rem"}>
+                <Image src="/img/orders.png" h={"1.5rem"} w={"1.5rem"} />
+                <Text>Order</Text>
+              </Flex>
             </Link>
             <Link as={NavLink} sx={linkStyles.link} to="billing">
-              <Text>Billing</Text>
+              <Flex align={"center"} gap={"0.5rem"}>
+                <Image src="/img/billing.png" h={"1.5rem"} w={"1.5rem"} />
+                <Text>Bill</Text>
+              </Flex>
             </Link>
           </Flex>
         </Box>

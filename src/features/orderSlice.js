@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  tableNumber: 1,
   cartItem: [],
 };
 
@@ -10,6 +11,9 @@ const orderSlice = createSlice({
   reducers: {
     emptyCart: (state, action) => {
       state.cartItem = [];
+    },
+    emptyTableNumber: (state, action) => {
+      state.tableNumber = 0;
     },
     addIntoCart: (state, action) => {
       const newItem = action.payload;
@@ -59,18 +63,21 @@ const orderSlice = createSlice({
       }
     },
     onChangeInput: (state, action) => {
-      const { id, value } = action.payload;
-      const newArray = state.cartItem.map((item) => {
-        if (item.id === id) {
-          item.quantity = Number(value);
-        }
-        return item;
+      const { value } = action.payload;
+      state.tableNumber = value;
+      state.cartItem.map((ordersLoad) => {
+        ordersLoad.table_number = value;
       });
-      state.cartItem = newArray;
     },
   },
 });
 
 export default orderSlice.reducer;
-export const { addIntoCart, amount, updateAmount, onChangeInput, emptyCart } =
-  orderSlice.actions;
+export const {
+  addIntoCart,
+  amount,
+  updateAmount,
+  onChangeInput,
+  emptyCart,
+  emptyTableNumber,
+} = orderSlice.actions;

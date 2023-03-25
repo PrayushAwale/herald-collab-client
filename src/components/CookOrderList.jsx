@@ -1,7 +1,14 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
-const CookOrderList = ({ food_name, price, isCompleted, table_number, id }) => {
+const CookOrderList = ({
+  food_name,
+  price,
+  isCompleted,
+  table_number,
+  id,
+  quantity,
+}) => {
   const handleUpdate = async () => {
     try {
       const body = {
@@ -31,7 +38,7 @@ const CookOrderList = ({ food_name, price, isCompleted, table_number, id }) => {
       <Flex align={"center"} p={"0 1rem"} w={"100%"}>
         <Text w={"33rem"}>{food_name}</Text>
         <Flex justify={"space-between"} w={"100%"}>
-          <Text>{price}</Text>
+          <Text>{quantity}</Text>
           <Text> {table_number} </Text>
           <Text> {isCompleted ? "Completed" : "Incomplete"} </Text>
         </Flex>
