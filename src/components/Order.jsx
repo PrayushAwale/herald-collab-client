@@ -1,9 +1,6 @@
 import {
   Box,
-  Button,
   VStack,
-  Input,
-  HStack,
   Heading,
   Flex,
   Link,
@@ -16,8 +13,10 @@ import { data } from "../data";
 import OrderList from "./OrderList";
 import SideCart from "./SideCart";
 import SearchandHeader from "./SearchandHeader";
+import { useSelector } from "react-redux";
 
 const Order = () => {
+  const { searched } = useSelector((state) => state.filter);
   const categoryLink = {
     bg: "black",
     color: "white",
@@ -43,11 +42,15 @@ const Order = () => {
             spacing={4}
             align={"stretch"}
           >
-            {data.map((item) => (
-              <OrderList key={item.id} {...item} />
-            ))}
+            {data
+              .filter((item) => item.item_name.toLowerCase().includes(searched))
+              .map((item) => (
+                <OrderList key={item.id} {...item} />
+              ))}
           </VStack>
-          <SideCart />
+          <Box position={"relative"}>
+            <SideCart />
+          </Box>
         </Flex>
       </Box>
     </Box>

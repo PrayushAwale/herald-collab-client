@@ -22,6 +22,7 @@ import {
   emptyCart,
   onChangeInput,
   emptyTableNumber,
+  updateTableNumber,
 } from "../features/orderSlice";
 
 const SideCart = () => {
@@ -78,6 +79,9 @@ const SideCart = () => {
       bg={"gray.100"}
       borderRadius={"2rem"}
       p={"2rem"}
+      position={"sticky"}
+      top={20}
+      left={0}
     >
       <Flex align={"center"} justify={"space-between"}>
         <Heading fontSize={"2rem"}>Your Order</Heading>
@@ -92,10 +96,10 @@ const SideCart = () => {
             <NumberInputField bg={"#fff"} width={"5rem"} />
             <NumberInputStepper>
               <NumberIncrementStepper
-              // onClick={() => dispatch(updateAmount({ id, increment: true }))}
+                onClick={() => dispatch(updateTableNumber(true))}
               />
               <NumberDecrementStepper
-              // onClick={() => dispatch(updateAmount({ id, increment: false }))}
+                onClick={() => dispatch(updateTableNumber(false))}
               />
             </NumberInputStepper>
           </NumberInput>

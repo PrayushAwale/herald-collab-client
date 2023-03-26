@@ -40,7 +40,6 @@ const orderSlice = createSlice({
         });
         state.cartItem = newArray;
       } else if (increment === "input") {
-        console.log("first");
         const { value } = action.payload;
         const newArray = state.cartItem.map((item) => {
           if (item.id === id) {
@@ -69,6 +68,18 @@ const orderSlice = createSlice({
         ordersLoad.table_number = value;
       });
     },
+    updateTableNumber: (state, action) => {
+      const type = action.payload;
+      if (type) {
+        state.tableNumber = state.tableNumber + 1;
+      } else {
+        if (state.tableNumber === 1) {
+          return;
+        } else {
+          state.tableNumber = state.tableNumber - 1;
+        }
+      }
+    },
   },
 });
 
@@ -80,4 +91,5 @@ export const {
   onChangeInput,
   emptyCart,
   emptyTableNumber,
+  updateTableNumber,
 } = orderSlice.actions;

@@ -1,5 +1,35 @@
 export const data = [
   {
+    id: "101",
+    item_name: "Mozzarella sticks",
+    price: 55.91,
+  },
+  {
+    id: "102",
+    item_name: "Chicken pot pie",
+    price: 55.91,
+  },
+  {
+    id: "103",
+    item_name: "Grilled cheese",
+    price: 55.91,
+  },
+  {
+    id: "104",
+    item_name: "Cinnamon rolls",
+    price: 55.91,
+  },
+  {
+    id: "105",
+    item_name: "Chicken burger",
+    price: 55.91,
+  },
+  {
+    id: "106",
+    item_name: "Breadsticks",
+    price: 55.91,
+  },
+  {
     id: "55",
     item_name: "Burger",
     price: 55.91,
