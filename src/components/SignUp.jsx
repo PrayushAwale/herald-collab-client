@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
-  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -17,18 +15,23 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoader } from "../features/loaderSlice";
 import { useToast } from "@chakra-ui/react";
+import { getTokenHolder } from "../features/authSlice";
 
 const SignUp = () => {
+  const [show, setShow] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast = useToast();
+
   const emailRef = useRef();
   const usernameRef = useRef();
   const companyNameRef = useRef();
   const phoneNumberRef = useRef();
   const passwordRef = useRef();
-  const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleClick = () => setShow(!show);
-  const toast = useToast();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,6 +49,7 @@ const SignUp = () => {
         body: JSON.stringify(body),
       });
       if (response.ok) {
+        dispatch(getTokenHolder(await response.json()));
         dispatch(setLoader());
         navigate("/rms/order");
         return;
@@ -74,6 +78,7 @@ const SignUp = () => {
               </Text>
             </FormLabel>
             <Input
+              autoComplete="off"
               type={"email"}
               borderColor={"gray.300"}
               placeholder="Enter email"
@@ -88,6 +93,7 @@ const SignUp = () => {
               </Text>
             </FormLabel>
             <Input
+              autoComplete="off"
               type={"text"}
               borderColor={"gray.300"}
               placeholder="Enter username"
@@ -102,6 +108,7 @@ const SignUp = () => {
               </Text>
             </FormLabel>
             <Input
+              autoComplete="off"
               type={"text"}
               borderColor={"gray.300"}
               placeholder="Enter company name"
@@ -116,6 +123,7 @@ const SignUp = () => {
               </Text>
             </FormLabel>
             <Input
+              autoComplete="off"
               type={"text"}
               borderColor={"gray.300"}
               placeholder="Enter phone number"
@@ -131,6 +139,7 @@ const SignUp = () => {
             </FormLabel>
             <InputGroup size="md">
               <Input
+                autoComplete="off"
                 pr="4.5rem"
                 type={show ? "text" : "password"}
                 placeholder="Enter password"

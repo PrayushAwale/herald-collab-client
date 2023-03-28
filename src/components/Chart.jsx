@@ -1,4 +1,5 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import ReactEcharts from "echarts-for-react";
 import {
   LineChart,
   Line,
@@ -7,92 +8,190 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  BarChart,
+  Bar,
+  Cell,
+  Legend,
 } from "recharts";
 
-const data1 = [
-  { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 500, pv: 3400, amt: 4400 },
-  { name: "Page c", uv: 900, pv: 5400, amt: 1400 },
-  { name: "Page d", uv: 1000, pv: 1400, amt: 1400 },
-  { name: "Page e", uv: 600, pv: 6400, amt: 3400 },
-  { name: "Page f", uv: 700, pv: 9400, amt: 4400 },
-  { name: "Page g", uv: 800, pv: 1400, amt: 6400 },
-];
-
-const data = [
-  {
-    name: "January",
-    Iphone: 4000,
-  },
-  {
-    name: "March",
-    Iphone: 1000,
-  },
-  {
-    name: "May",
-    Iphone: 4000,
-  },
-  {
-    name: "July",
-    Iphone: 800,
-  },
-  {
-    name: "October",
-    Iphone: 1500,
-  },
-];
-
 function Chart() {
+  const data2 = [
+    {
+      name: "Page A",
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: "Page B",
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "Page C",
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "Page D",
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: "Page E",
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "Page F",
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: "Page G",
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
+  const data = [
+    {
+      name: "January",
+      revenues: 4000,
+    },
+    {
+      name: "February",
+      revenues: 4500,
+    },
+    {
+      name: "March",
+      revenues: 1000,
+    },
+    {
+      name: "April",
+      revenues: 500,
+    },
+    {
+      name: "May",
+      revenues: 4000,
+    },
+    {
+      name: "April",
+      revenues: 3000,
+    },
+    {
+      name: "July",
+      revenues: 800,
+    },
+    {
+      name: "August",
+      revenues: 1000,
+    },
+    {
+      name: "September",
+      revenues: 1500,
+    },
+    {
+      name: "October",
+      revenues: 1300,
+    },
+    {
+      name: "November",
+      revenues: 1000,
+    },
+    {
+      name: "December",
+      revenues: 2000,
+    },
+  ];
+
+  const option = {
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [
+          120,
+          {
+            value: 200,
+            itemStyle: {
+              color: "#a90000",
+            },
+          },
+          150,
+          80,
+          70,
+          110,
+          130,
+        ],
+        type: "bar",
+      },
+    ],
+  };
   return (
-    <>
-      <h2>Quarterly sales figures</h2>
-      <Flex p={"1rem 3rem"}>
-        <LineChart width={400} height={400} data={data1}>
-          <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        </LineChart>
-        <ResponsiveContainer
-          height={"100%"}
-          width="90%"
+    <Box p={"2rem"}>
+      <Text mb={"1rem"}>Quarterly sales figures</Text>
+
+      <ResponsiveContainer
+        height={"100%"}
+        width="90%"
+        backgroundColor={"red"}
+        aspect={3}
+      >
+        <LineChart
+          width={500}
+          height={800}
+          data={data}
           backgroundColor={"red"}
-          aspect={3}
+          margin={{
+            top: 15,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
         >
-          <LineChart
-            width={500}
-            height={800}
-            data={data}
-            backgroundColor={"red"}
-            margin={{
-              top: 15,
-              right: 30,
-              left: 20,
-              bottom: 5,
+          <CartesianGrid horizontal="true" vertical="" stroke="#666d73" />
+          <XAxis dataKey="name" tick={{ fill: "#fff" }} />
+          <YAxis tick={{ fill: "#fff" }} />
+          <Tooltip
+            contentStyle={{ backgroundColor: "#fdb78b", color: "#fff" }}
+            itemStyle={{ color: "#fff" }}
+            cursor={false}
+          />
+          <Line
+            type="monotone"
+            dataKey="revenues"
+            stroke="#fdb78b"
+            strokeWidth="5"
+            dot={{ fill: "#2e4355", stroke: "#fdb78b", strokeWidth: 2, r: 5 }}
+            activeDot={{
+              fill: "#2e4355",
+              stroke: "#fdb78b",
+              strokeWidth: 5,
+              r: 10,
             }}
-          >
-            <CartesianGrid horizontal="true" vertical="" stroke="#243240" />
-            <XAxis dataKey="name" tick={{ fill: "#fff" }} />
-            <YAxis tick={{ fill: "#fff" }} />
-            <Tooltip
-              contentStyle={{ backgroundColor: "#8884d8", color: "#fff" }}
-              itemStyle={{ color: "#fff" }}
-              cursor={false}
-            />
-            <Line
-              type="monotone"
-              dataKey="Iphone"
-              stroke="#8884d8"
-              strokeWidth="5"
-              dot={{ fill: "#2e4355", stroke: "#8884d8", strokeWidth: 2, r: 5 }}
-              activeDot={{
-                fill: "#2e4355",
-                stroke: "#8884d8",
-                strokeWidth: 5,
-                r: 10,
-              }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </Flex>
-    </>
+          />
+        </LineChart>
+      </ResponsiveContainer>
+      <ReactEcharts option={option} />
+
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart width={150} height={40} data={data2}>
+          <Bar dataKey="uv" fill="#fdb78b" />
+        </BarChart>
+      </ResponsiveContainer>
+    </Box>
   );
 }
 
