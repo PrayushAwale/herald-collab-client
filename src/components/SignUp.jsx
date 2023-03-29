@@ -49,7 +49,8 @@ const SignUp = () => {
         body: JSON.stringify(body),
       });
       if (response.ok) {
-        dispatch(getTokenHolder(await response.json()));
+        const data = await response.json();
+        dispatch(getTokenHolder(data));
         dispatch(setLoader());
         navigate("/rms/order");
         return;

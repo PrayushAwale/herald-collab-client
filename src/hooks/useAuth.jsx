@@ -1,8 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import getCookie from "./getCookie";
 
 const useAuth = () => {
-  const { token } = useSelector((state) => state.auth);
+  const token = getCookie("token");
   return token;
 };
 

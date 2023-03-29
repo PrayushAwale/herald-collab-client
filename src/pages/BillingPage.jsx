@@ -38,7 +38,7 @@ const BillingPage = () => {
         </Flex>
         {isLoading && <SkeletonLoader />}
         {data &&
-          data.orders.map((order) => {
+          data.data.map((order) => {
             return <BillingOrderList key={order.id} {...order} />;
           })}
       </Box>

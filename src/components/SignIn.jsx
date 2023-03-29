@@ -18,14 +18,19 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoader } from "../features/loaderSlice";
 import { useToast } from "@chakra-ui/react";
+import { getTokenHolder } from "../features/authSlice";
+import setCookie from "../hooks/setCookie";
 
 const SignIn = () => {
   const [data, setData] = useState("");
+  const [show, setShow] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [show, setShow] = useState(false);
+
   const handleClick = () => setShow(!show);
   const toast = useToast();
   const handleSubmit = async (e) => {
@@ -43,11 +48,15 @@ const SignIn = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        // document.cookie = "token= " + data.token;
+        setCookie("token", data.token);
+        dispatch(getTokenHolder(data));
         dispatch(setLoader());
         navigate("/rms/order");
         return;
       }
-      setData(await response.json());
+      setData(data);
       dispatch(setLoader());
     } catch (err) {
       dispatch(setLoader());

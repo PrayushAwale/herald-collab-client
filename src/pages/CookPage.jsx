@@ -37,7 +37,7 @@ const CookPage = () => {
         </Flex>
         {isLoading && <SkeletonLoader />}
         {data &&
-          data.orders.map((order) => {
+          data.data.map((order) => {
             return <CookOrderList key={order.id} {...order} />;
           })}
       </Box>
