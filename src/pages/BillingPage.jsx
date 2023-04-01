@@ -14,7 +14,6 @@ const BillingPage = () => {
     // Refetch the data every 1 second = 1000 ms
     refetchInterval: 1000,
   });
-
   return (
     <Box h={"100vh"} bg={"#fff"}>
       <Box p={"2rem 5rem"}>

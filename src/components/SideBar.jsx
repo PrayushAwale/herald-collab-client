@@ -2,31 +2,29 @@ import { Box, Heading, Flex, Link, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { BiLayer } from "react-icons/bi";
-// import "../Links.css";
 
 const SideBar = () => {
   const linkStyles = {
-    after: {
-      content: '""',
-      h: "2rem",
-      w: "2rem",
-      position: "absolute",
-      top: "-57.8%",
-      right: 0,
-      borderBottomRightRadius: "40%",
-      boxShadow: "7.5px 7.5px 0 7.5px #fff",
-    },
-    before: {
-      content: '""',
-      h: "2rem",
-      w: "2rem",
-      position: "absolute",
-      bottom: "-57.8%",
-      right: 0,
-      borderTopRightRadius: "40%",
-      boxShadow: "7.5px -7.5px 0 7.5px #fff",
-    },
+    // after: {
+    //   content: '""',
+    //   h: "2rem",
+    //   w: "2rem",
+    //   position: "absolute",
+    //   top: "-57.8%",
+    //   right: 0,
+    //   borderBottomRightRadius: "40%",
+    //   boxShadow: "7.5px 7.5px 0 7.5px #fff",
+    // },
+    // before: {
+    //   content: '""',
+    //   h: "2rem",
+    //   w: "2rem",
+    //   position: "absolute",
+    //   bottom: "-57.8%",
+    //   right: 0,
+    //   borderTopRightRadius: "40%",
+    //   boxShadow: "7.5px -7.5px 0 7.5px #fff",
+    // },
     link: {
       position: "relative",
       borderRadius: "100rem 0 0 100rem",
@@ -45,7 +43,7 @@ const SideBar = () => {
       h={"100vh"}
       w={"inherit"}
       bg={
-        "linear-gradient(130deg, rgba(253,197,162,1) 0%, rgba(253,183,139,1) 100%)"
+        "linear-gradient(130deg, rgba(238,165,81,255) 0%, rgba(243,183,114,255) 100%)"
       }
       py={"1rem"}
       borderRadius={"0 1.7rem 1.7rem 0"}
@@ -63,25 +61,41 @@ const SideBar = () => {
         <Box fontWeight={500}>
           <Flex gap={"0.5rem"} flexDirection={"column"} w={"100%"} pl={"1rem"}>
             <Link as={NavLink} sx={linkStyles.link} to="home">
-              <Flex align={"center"} gap={"0.5rem"}>
+              <Flex
+                align={"center"}
+                gap={"0.5rem"}
+                flexDirection={["column", "column", "column", "row"]}
+              >
                 <AiOutlineDashboard size={"1.5rem"} />
                 <Text>Dashboard</Text>
               </Flex>
             </Link>
             <Link as={NavLink} sx={linkStyles.link} to="cook">
-              <Flex align={"center"} gap={"0.5rem"}>
+              <Flex
+                align={"center"}
+                gap={"0.5rem"}
+                flexDirection={["column", "column", "column", "row"]}
+              >
                 <Image src="/img/chef-hat.png" h={"1.5rem"} w={"1.5rem"} />
                 <Text>Cook</Text>
               </Flex>
             </Link>
             <Link as={NavLink} sx={linkStyles.link} to="order">
-              <Flex align={"center"} gap={"0.5rem"}>
+              <Flex
+                align={"center"}
+                gap={"0.5rem"}
+                flexDirection={["column", "column", "column", "row"]}
+              >
                 <Image src="/img/orders.png" h={"1.5rem"} w={"1.5rem"} />
                 <Text>Order</Text>
               </Flex>
             </Link>
             <Link as={NavLink} sx={linkStyles.link} to="billing">
-              <Flex align={"center"} gap={"0.5rem"}>
+              <Flex
+                align={"center"}
+                gap={"0.5rem"}
+                flexDirection={["column", "column", "column", "row"]}
+              >
                 <Image src="/img/billing.png" h={"1.5rem"} w={"1.5rem"} />
                 <Text>Bill</Text>
               </Flex>

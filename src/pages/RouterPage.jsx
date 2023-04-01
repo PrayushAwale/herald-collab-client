@@ -12,7 +12,7 @@ function RouterPage() {
         <Box position={"relative"} width={"15vw"}>
           <SideBar />
         </Box>
-        <Box w={"85vw"}>
+        <Box w={"85vw"} maxW={"85vw"} position={"relative"}>
           <Outlet />
         </Box>
       </Flex>

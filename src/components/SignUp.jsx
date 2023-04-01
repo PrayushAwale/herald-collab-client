@@ -156,9 +156,9 @@ const SignUp = () => {
           </Box>
 
           <Button
-            bg={"#fdb78b"}
+            bg={"#eea551"}
             color={"#000"}
-            _hover={{ bg: "#ffbf98" }}
+            _hover={{ bg: "#f3b772" }}
             boxShadow={"0px 5px 10px -3px rgba(0,0,0,0.1)"}
             onClick={(e) => handleSubmit(e)}
           >

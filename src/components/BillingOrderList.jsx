@@ -1,5 +1,7 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useToast } from "@chakra-ui/react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setLoader } from "../features/loaderSlice";
 
 const BillingOrderList = ({
   food_name,
@@ -8,22 +10,41 @@ const BillingOrderList = ({
   table_number,
   id,
   quantity,
+  timestamp,
 }) => {
+  const dispatch = useDispatch();
+  const toast = useToast();
+
   const handleUpdate = async () => {
-    // try {
-    //   const body = {
-    //     id,
-    //     isCompleted: !isCompleted,
-    //   };
-    //   const response = await fetch("http://localhost:5500/order/updateorder", {
-    //     method: "PUT",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(body),
-    //   });
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
-    console.log("Hello");
+    try {
+      dispatch(setLoader());
+      const body = {
+        id,
+        table_number,
+        price,
+        timestamp,
+      };
+      const response = await fetch("http://localhost:5500/file/newbill", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setLoader());
+        return;
+      }
+    } catch (err) {
+      dispatch(setLoader());
+      console.error(err);
+      toast({
+        title: "Unable to Creat Bill",
+        description: "There was some problem while creating bill",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
   return (
     <Box

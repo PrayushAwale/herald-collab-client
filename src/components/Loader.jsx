@@ -3,10 +3,10 @@ import { Center, Spinner, Text, VStack } from "@chakra-ui/react";
 const Loader = () => {
   return (
     <Center
-      h={"100vh"}
+      h={"100%"}
       w={"100%"}
       bg={"rgba(255,255,255,0.8)"}
-      position={"absolute"}
+      position={"fixed"}
       top={0}
       left={0}
       zIndex={3}

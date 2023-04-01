@@ -8,14 +8,40 @@ import {
   StackDivider,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { data } from "../data";
 import OrderList from "./OrderList";
 import SideCart from "./SideCart";
 import SearchandHeader from "./SearchandHeader";
 import { useSelector } from "react-redux";
 import getCookie from "../hooks/getCookie";
+import { useQuery } from "react-query";
 
 const Order = () => {
+  // const fetcing = async () => {
+  //   const res = await fetch(
+  //     `http://localhost:5500/fooditem/getFoodItems/${id}`,
+  //     {
+  //       method: "GET",
+  //     }
+  //   );
+  //   const jsonData = await res.json();
+  //   // console.log(jsonData.data);
+  //   return jsonData.data;
+  // };
+  // const data = fetcing();
+  // console.log(data);
+  // console.log(data);
+  // fetcing();
+
+  const getFacts = async () => {
+    const id = getCookie("id");
+    const res = await fetch(
+      `http://localhost:5500/fooditem/getFoodItems/${id}`
+    );
+    return res.json();
+  };
+
+  const { data, error, isLoading } = useQuery("key", getFacts);
+
   //Getting the Global State value stored in searched
   const { searched } = useSelector((state) => state.filter);
   // A custom styles variable for category link
@@ -25,13 +51,12 @@ const Order = () => {
     p: "0.5rem 2rem",
     borderRadius: "5rem",
   };
-  // useEffect(() => {
-  //   const token = getCookie("token");
-  //   console.log(token);
-  // });
+
   return (
-    <Box w={"100%"} px={"2rem"} position={"relative"} pt={"7rem"}>
-      <SearchandHeader />
+    <Box w={"100%"} px={"2rem"} position={"relative"}>
+      <Box bg={"red"} w={"100%"} position={"sticky"} top={0}>
+        <SearchandHeader />
+      </Box>
       <Box as="section" h={"100vh"} w={"100%"} bg={"#fff"}>
         <Heading mb={"1rem"}>Categories</Heading>
         <Flex align={"center"} gap={"1rem"} mb={"0.8rem"}>
@@ -49,15 +74,17 @@ const Order = () => {
             align={"stretch"}
           >
             {/* Appling the filter to search the food item from the list  */}
-            {data
-              .filter((item) =>
-                item.item_name.toLowerCase().includes(searched.toLowerCase())
-              )
-              .map((item) => (
-                <OrderList key={item.id} {...item} />
-              ))}
+            {data &&
+              data.data
+                .filter((item) =>
+                  item.food_name.toLowerCase().includes(searched.toLowerCase())
+                )
+                .map((item) => <OrderList key={item.id} {...item} />)}
           </VStack>
-          <Box position={"relative"}>
+          <Box
+            position={"relative"}
+            display={["none", "none", "none", "inline-block"]}
+          >
             <SideCart />
           </Box>
         </Flex>

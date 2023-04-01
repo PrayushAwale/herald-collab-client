@@ -49,8 +49,9 @@ const SignIn = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // document.cookie = "token= " + data.token;
-        setCookie("token", data.token);
+        const { token, user } = data;
+        setCookie("token", token);
+        setCookie("id", user.id);
         dispatch(getTokenHolder(data));
         dispatch(setLoader());
         navigate("/rms/order");
@@ -88,7 +89,7 @@ const SignIn = () => {
             With our{" "}
             <Text
               as={"span"}
-              color={"#ffae7c"}
+              color={"#ee7b33"}
               bgGradient="linear(to-r, #ffc6a2, #ff873d)"
               bgClip="text"
               fontWeight="extrabold"
@@ -136,9 +137,9 @@ const SignIn = () => {
           </Flex>
 
           <Button
-            bg={"#fdb78b"}
+            bg={"#eea551"}
             color={"#000"}
-            _hover={{ bg: "#ffbf98" }}
+            _hover={{ bg: "#f3b772" }}
             boxShadow={"0px 5px 10px -3px rgba(0,0,0,0.1)"}
             onClick={(e) => handleSubmit(e)}
           >
@@ -149,8 +150,8 @@ const SignIn = () => {
             <Link
               as={NavLink}
               textDecoration={"underline"}
-              color={"#fdb78b"}
-              _hover={{ color: "#ff9350" }}
+              color={"#eea551"}
+              _hover={{ color: "#f3b772" }}
               fontWeight={"bold"}
               to={"/signup"}
             >

@@ -9,9 +9,8 @@ const SearchandHeader = () => {
   const dispatch = useDispatch();
   return (
     <Box
-      w={"75rem"}
-      position={"fixed"}
-      top={0}
+      w={"inherit"}
+      maxW={"inherit"}
       bg={"#fff"}
       borderBottom={"1.5px solid"}
       borderBottomColor={"gray.100"}
@@ -23,7 +22,7 @@ const SearchandHeader = () => {
           bg={"#fff"}
           onChange={(e) => dispatch(handleInput(e.target.value))}
         />
-        <Button bg={"#fdb78b"} _hover={{ bg: "#ffd0b4" }}>
+        <Button bg={"#eea551"} _hover={{ bg: "#f3b772" }}>
           Search
         </Button>
         <IconButton icon={<IoNotifications size={"2rem"} />} />

@@ -38,7 +38,7 @@ const SideCart = () => {
           food_name: item.food_name,
           quantity: item.quantity,
           description: item.description,
-          table_number: Number(item.table_number),
+          table_number: Number(tableNumber),
           isCompleted: item.isCompleted,
         };
       });
@@ -141,8 +141,8 @@ const SideCart = () => {
               </VStack>
 
               <Button
-                bg={"#fdb78b"}
-                _hover={{ bg: "#ffd0b4" }}
+                bg={"#eea551"}
+                _hover={{ bg: "#f3b772" }}
                 onClick={handleOrder}
               >
                 Order

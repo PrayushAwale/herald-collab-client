@@ -3,7 +3,7 @@ import React from "react";
 import { addIntoCart, amount } from "../features/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const OrderList = ({ item_name, price, id }) => {
+const OrderList = ({ food_name, price, id }) => {
   const priceInt = price;
   const dispatch = useDispatch();
   const { cartItem } = useSelector((state) => state.order);
@@ -21,8 +21,8 @@ const OrderList = ({ item_name, price, id }) => {
         }
         dispatch(
           addIntoCart({
-            food_name: item_name,
-            price: priceInt,
+            food_name: food_name,
+            price: price,
             id,
             quantity: 1,
             table_number: 1,
@@ -33,7 +33,7 @@ const OrderList = ({ item_name, price, id }) => {
       }}
     >
       <Box w={"20rem"}>
-        <Text>{item_name}</Text>
+        <Text>{food_name}</Text>
       </Box>
       <Box>
         <Text>{price}</Text>
