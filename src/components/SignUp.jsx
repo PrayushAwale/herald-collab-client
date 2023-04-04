@@ -16,6 +16,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { setLoader } from "../features/loaderSlice";
 import { useToast } from "@chakra-ui/react";
 import { getTokenHolder } from "../features/authSlice";
+import setCookie from "../hooks/setCookie";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -50,6 +51,9 @@ const SignUp = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        const { token, user } = data;
+        setCookie("token", token);
+        setCookie("id", user.id);
         dispatch(getTokenHolder(data));
         dispatch(setLoader());
         navigate("/rms/order");

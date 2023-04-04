@@ -16,22 +16,6 @@ import getCookie from "../hooks/getCookie";
 import { useQuery } from "react-query";
 
 const Order = () => {
-  // const fetcing = async () => {
-  //   const res = await fetch(
-  //     `http://localhost:5500/fooditem/getFoodItems/${id}`,
-  //     {
-  //       method: "GET",
-  //     }
-  //   );
-  //   const jsonData = await res.json();
-  //   // console.log(jsonData.data);
-  //   return jsonData.data;
-  // };
-  // const data = fetcing();
-  // console.log(data);
-  // console.log(data);
-  // fetcing();
-
   const getFacts = async () => {
     const id = getCookie("id");
     const res = await fetch(
@@ -54,7 +38,7 @@ const Order = () => {
 
   return (
     <Box w={"100%"} px={"2rem"} position={"relative"}>
-      <Box bg={"red"} w={"100%"} position={"sticky"} top={0}>
+      <Box bg={"red"} w={"100%"} position={"sticky"} top={0} zIndex={1}>
         <SearchandHeader />
       </Box>
       <Box as="section" h={"100vh"} w={"100%"} bg={"#fff"}>
@@ -84,6 +68,7 @@ const Order = () => {
           <Box
             position={"relative"}
             display={["none", "none", "none", "inline-block"]}
+            bg={"red"}
           >
             <SideCart />
           </Box>

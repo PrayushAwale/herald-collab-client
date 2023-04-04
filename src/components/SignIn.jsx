@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoader } from "../features/loaderSlice";
 import { useToast } from "@chakra-ui/react";
-import { getTokenHolder } from "../features/authSlice";
+import { getTokenHolder, setCredential } from "../features/authSlice";
 import setCookie from "../hooks/setCookie";
 
 const SignIn = () => {
@@ -52,7 +52,8 @@ const SignIn = () => {
         const { token, user } = data;
         setCookie("token", token);
         setCookie("id", user.id);
-        dispatch(getTokenHolder(data));
+        dispatch(getTokenHolder(token));
+        dispatch(setCredential(user));
         dispatch(setLoader());
         navigate("/rms/order");
         return;

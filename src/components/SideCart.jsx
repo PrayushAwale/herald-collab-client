@@ -79,15 +79,16 @@ const SideCart = () => {
       bg={"gray.100"}
       borderRadius={"2rem"}
       p={"2rem"}
-      position={"sticky"}
-      top={20}
-      left={0}
+      position={"fixed"}
+      top={200}
+      // left={0}
     >
       <Flex align={"center"} justify={"space-between"}>
         <Heading fontSize={"2rem"}>Your Order</Heading>
         <Flex align={"center"} gap={"0.8rem"}>
           <Text>Table No.</Text>
           <NumberInput
+            // position={"static"}
             value={tableNumber}
             onInput={(e) => {
               dispatch(onChangeInput({ value: e.target.value }));
