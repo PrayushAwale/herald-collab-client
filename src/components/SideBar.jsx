@@ -100,6 +100,26 @@ const SideBar = () => {
                 <Text>Bill</Text>
               </Flex>
             </Link>
+            <Link as={NavLink} sx={linkStyles.link} to="employee">
+              <Flex
+                align={"center"}
+                gap={"0.5rem"}
+                flexDirection={["column", "column", "column", "row"]}
+              >
+                <Image src="/img/employees.png" h={"1.5rem"} w={"1.5rem"} />
+                <Text>Employees</Text>
+              </Flex>
+            </Link>
+            <Link as={NavLink} sx={linkStyles.link} to="fooditem">
+              <Flex
+                align={"center"}
+                gap={"0.5rem"}
+                flexDirection={["column", "column", "column", "row"]}
+              >
+                <Image src="/img/clipboard.png" h={"1.5rem"} w={"1.5rem"} />
+                <Text>Items</Text>
+              </Flex>
+            </Link>
           </Flex>
         </Box>
       </Flex>

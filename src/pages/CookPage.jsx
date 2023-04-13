@@ -3,6 +3,7 @@ import React from "react";
 import CookOrderList from "../components/CookOrderList";
 import { useQuery } from "react-query";
 import SkeletonLoader from "../components/SkeletonLoader";
+import Profile from "../components/Profile";
 
 const CookPage = () => {
   const getFacts = async () => {
@@ -16,9 +17,15 @@ const CookPage = () => {
 
   return (
     <Box h={"100vh"} bg={"#fff"}>
-      <Box p={"2rem 5rem"}>
-        <Heading>The Orders</Heading>
-      </Box>
+      <Flex
+        p={"2rem 5rem"}
+        w={"100%"}
+        align={"center"}
+        justify={"space-between"}
+      >
+        <Heading>The Cook</Heading>
+        <Profile />
+      </Flex>
       <Box p={"2rem 2.5rem"} w={"78rem"}>
         <Flex
           align={"center"}

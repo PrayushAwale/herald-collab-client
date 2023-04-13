@@ -10,6 +10,7 @@ import {
   InputGroup,
   InputRightElement,
   Link,
+  Select,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -30,46 +31,95 @@ const SignIn = () => {
 
   const emailRef = useRef();
   const passwordRef = useRef();
+  const work_asRef = useRef();
 
   const handleClick = () => setShow(!show);
   const toast = useToast();
   const handleSubmit = async (e) => {
     dispatch(setLoader());
     e.preventDefault();
-    try {
-      const body = {
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      };
-      const response = await fetch("http://localhost:5500/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+    //For Emplyoee
+    if (work_asRef.current.value) {
+      try {
+        const body = {
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        };
+        const response = await fetch("http://localhost:5500/signinemployee", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        const { token, user } = data;
-        setCookie("token", token);
-        setCookie("id", user.id);
-        dispatch(getTokenHolder(token));
-        dispatch(setCredential(user));
+        if (response.ok) {
+          const data = await response.json();
+          const { token, user } = data;
+          setCookie("token", token);
+          setCookie("id", user.adminid);
+          setCookie("role", user.work_as);
+          dispatch(getTokenHolder(token));
+          dispatch(setCredential(user));
+          dispatch(setLoader());
+          if (user.work_as === "Cook") {
+            navigate("/rms/cook");
+          } else if (user.work_as === "Waiter") {
+            navigate("/rms/order");
+          } else if (user.work_as === "Cashier") {
+            navigate("/rms/billing");
+          }
+          return;
+        }
+        setData(data);
         dispatch(setLoader());
-        navigate("/rms/order");
-        return;
+      } catch (err) {
+        dispatch(setLoader());
+        console.error(err.message);
+        toast({
+          title: "Unable Log In",
+          description: "There was some problem while logging in",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       }
-      setData(data);
-      dispatch(setLoader());
-    } catch (err) {
-      dispatch(setLoader());
-      console.error(err.message);
-      toast({
-        title: "Unable Log In",
-        description: "There was some problem while logging in",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
+    } else {
+      //For Admin
+      try {
+        const body = {
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        };
+        const response = await fetch("http://localhost:5500/signin", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const { token, user } = data;
+          setCookie("token", token);
+          setCookie("id", user.id);
+          setCookie("role", "Admin");
+          dispatch(getTokenHolder(token));
+          dispatch(setCredential(user));
+          dispatch(setLoader());
+          navigate("/rms/home");
+          return;
+        }
+        setData(data);
+        dispatch(setLoader());
+      } catch (err) {
+        dispatch(setLoader());
+        console.error(err.message);
+        toast({
+          title: "Unable Log In",
+          description: "There was some problem while logging in",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
     }
   };
   return (
@@ -103,8 +153,9 @@ const SignIn = () => {
             <Text color={"red"} textAlign={"center"}>
               {data && data.message}
             </Text>
-            <FormLabel>Email</FormLabel>
+            <FormLabel htmlFor="email">Email</FormLabel>
             <Input
+              id={"email"}
               type={"email"}
               borderColor={"gray.300"}
               placeholder="Enter email"
@@ -112,9 +163,10 @@ const SignIn = () => {
             />
           </Box>
           <Box>
-            <FormLabel>Password</FormLabel>
+            <FormLabel htmlFor="password">Password</FormLabel>
             <InputGroup size="md">
               <Input
+                id={"password"}
                 pr="4.5rem"
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
@@ -127,6 +179,12 @@ const SignIn = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
+          </Box>
+          <Box>
+            <FormLabel htmlFor="employeeName">Work as</FormLabel>
+            <Select placeholder="Select option" ref={work_asRef}>
+              <option value={"true"}>Employee</option>
+            </Select>
           </Box>
           <Flex align={"center"} justify={"space-between"}>
             <Flex>
@@ -143,6 +201,13 @@ const SignIn = () => {
             _hover={{ bg: "#f3b772" }}
             boxShadow={"0px 5px 10px -3px rgba(0,0,0,0.1)"}
             onClick={(e) => handleSubmit(e)}
+            // onClick={() => {
+            //   if (work_asRef.current.value) {
+            //     console.log("Employee");
+            //   } else {
+            //     console.log("admin");
+            //   }
+            // }}
           >
             Sign In
           </Button>
