@@ -24,6 +24,7 @@ import {
   emptyTableNumber,
   updateTableNumber,
 } from "../features/orderSlice";
+import getCookie from "../hooks/getCookie";
 
 const SideCart = () => {
   const { cartItem, tableNumber } = useSelector((state) => state.order);
@@ -32,6 +33,7 @@ const SideCart = () => {
   const handleOrder = async () => {
     dispatch(setLoader());
     try {
+      const adminid = getCookie("id");
       const body = cartItem.map((item) => {
         return {
           price: item.price,
@@ -40,6 +42,7 @@ const SideCart = () => {
           description: item.description,
           table_number: Number(tableNumber),
           isCompleted: item.isCompleted,
+          adminid,
         };
       });
       const response = await fetch("http://localhost:5500/order/placeorder", {

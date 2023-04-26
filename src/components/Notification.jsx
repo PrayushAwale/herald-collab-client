@@ -10,10 +10,13 @@ import {
 } from "@chakra-ui/react";
 import { FiSettings, FiLogOut, FiBell } from "react-icons/fi";
 import { useQuery } from "react-query";
+import getCookie from "../hooks/getCookie";
+import MenuItemNotify from "./MenuItemNotify";
 
 const Notification = () => {
+  const id = getCookie("id");
   const getFacts = async () => {
-    const res = await fetch("http://localhost:5500/order/getBilling");
+    const res = await fetch(`http://localhost:5500/order/unserved/${id}`);
     return res.json();
   };
 
@@ -47,15 +50,8 @@ const Notification = () => {
       </Center>
       <MenuList>
         {data &&
-          data.data.map((i) => {
-            return (
-              <MenuItem>
-                <Flex direction={"column"}>
-                  <Text fontWeight={900}>Completed</Text>
-                  <Text>Dish ready for table {i.table_number}.</Text>
-                </Flex>
-              </MenuItem>
-            );
+          data.data.map((item) => {
+            return <MenuItemNotify key={item.id} {...item} />;
           })}
       </MenuList>
     </Menu>

@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
 
 const EmployeeList = ({
@@ -10,9 +10,9 @@ const EmployeeList = ({
   email,
 }) => {
   return (
-    <Flex
-      align={"center"}
-      gap={"2rem"}
+    <SimpleGrid
+      columns={6}
+      spacing={5}
       p={"2rem 1rem"}
       bg={"gray.100"}
       cursor={"pointer"}
@@ -24,7 +24,7 @@ const EmployeeList = ({
       <Text>{phone_number}</Text>
       <Text>{work_as}</Text>
       <Text>{createdAt}</Text>
-    </Flex>
+    </SimpleGrid>
   );
 };
 

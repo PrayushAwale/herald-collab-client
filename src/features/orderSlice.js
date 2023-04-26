@@ -13,7 +13,7 @@ const orderSlice = createSlice({
       state.cartItem = [];
     },
     emptyTableNumber: (state, action) => {
-      state.tableNumber = 0;
+      state.tableNumber = 1;
     },
     addIntoCart: (state, action) => {
       const newItem = action.payload;

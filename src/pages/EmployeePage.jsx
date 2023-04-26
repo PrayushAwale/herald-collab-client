@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import Modal from "../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../features/modalSlice";
@@ -6,6 +14,7 @@ import { useQuery } from "react-query";
 import getCookie from "../hooks/getCookie";
 import EmployeeList from "../components/EmployeeList";
 import Profile from "../components/Profile";
+import { queryClient } from "../App";
 
 const EmployeePage = () => {
   const { isActive } = useSelector((state) => state.modal);
@@ -18,11 +27,7 @@ const EmployeePage = () => {
     );
     return res.json();
   };
-  0;
-  const { data, error, isLoading } = useQuery("key", getEmployees, {
-    // Refetch the data every 1 second = 1000 ms
-    refetchInterval: 1000,
-  });
+  const { data, error, isLoading } = useQuery("getEmployees", getEmployees);
 
   return (
     <Box pos={"relative"} h={"100vh"}>
@@ -36,9 +41,9 @@ const EmployeePage = () => {
             </Flex>
           </Flex>
         </Flex>
-        <Flex
-          align={"center"}
-          justify={"space-between"}
+        <SimpleGrid
+          columns={6}
+          spacing={5}
           p={"0 1rem"}
           w={"100%"}
           borderBottom={"2px solid"}
@@ -48,9 +53,10 @@ const EmployeePage = () => {
           <Text>First name</Text>
           <Text>Last name</Text>
           <Text>Email</Text>
+          <Text>Phone</Text>
           <Text>Position</Text>
           <Text>Joine On</Text>
-        </Flex>
+        </SimpleGrid>
         <VStack p={"1rem 0.5rem"} align={"stretch"} spacing={"1rem"}>
           {data &&
             data.data.map((employee) => (

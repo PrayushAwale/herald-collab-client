@@ -4,10 +4,12 @@ import { useQuery } from "react-query";
 import SkeletonLoader from "../components/SkeletonLoader";
 import BillingOrderList from "../components/BillingOrderList";
 import Profile from "../components/Profile";
+import getCookie from "../hooks/getCookie";
 
 const BillingPage = () => {
+  const id = getCookie("id");
   const getFacts = async () => {
-    const res = await fetch("http://localhost:5500/order/getBilling");
+    const res = await fetch(`http://localhost:5500/order/getBilling/${id}`);
     return res.json();
   };
 

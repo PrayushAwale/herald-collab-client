@@ -7,6 +7,7 @@ const BillingOrderList = ({
   food_name,
   price,
   isCompleted,
+  isBilled,
   table_number,
   id,
   quantity,
@@ -20,12 +21,10 @@ const BillingOrderList = ({
       dispatch(setLoader());
       const body = {
         id,
-        table_number,
-        price,
-        timestamp,
+        isBilled: !isBilled,
       };
-      const response = await fetch("http://localhost:5500/file/newbill", {
-        method: "POST",
+      const response = await fetch("http://localhost:5500/order/createBill", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });

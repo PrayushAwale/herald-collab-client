@@ -14,10 +14,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { setLoader } from "../features/loaderSlice";
 import { setModal } from "../features/modalSlice";
 import { GrClose } from "react-icons/gr";
 import getCookie from "../hooks/getCookie";
-import { setLoader } from "../features/loaderSlice";
+import { queryClient } from "../App";
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const Modal = () => {
       if (response.ok) {
         dispatch(setLoader());
         dispatch(setModal());
+        queryClient.invalidateQueries("getEmployees");
         toast({
           title: "Added Sucessfully.",
           description: "Sucessfully Added new employee.",

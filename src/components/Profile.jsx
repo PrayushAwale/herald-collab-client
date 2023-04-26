@@ -53,6 +53,7 @@ const Profile = () => {
             onClick={() => {
               removeCookie("token");
               removeCookie("id");
+              removeCookie("role");
               navigate("/");
             }}
           >

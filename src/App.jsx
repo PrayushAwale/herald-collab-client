@@ -18,8 +18,8 @@ import FoodItem from "./pages/FoodItem";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import RollBasedProtectRoutes from "./components/RollBasedProtectRoutes";
 
+export const queryClient = new QueryClient();
 function App() {
-  const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>

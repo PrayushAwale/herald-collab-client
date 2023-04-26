@@ -4,10 +4,12 @@ import CookOrderList from "../components/CookOrderList";
 import { useQuery } from "react-query";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Profile from "../components/Profile";
+import getCookie from "../hooks/getCookie";
 
 const CookPage = () => {
+  const id = getCookie("id");
   const getFacts = async () => {
-    const res = await fetch("http://localhost:5500/order/getorder");
+    const res = await fetch(`http://localhost:5500/order/getorder/${id}`);
     return res.json();
   };
   const { data, error, isLoading } = useQuery("randomFacts", getFacts, {

@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.5.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fontsource/poppins": "^4.5.10",
     "@reduxjs/toolkit": "^1.9.3",
     "echarts": "^5.4.2",
     "echarts-for-react": "^3.0.2",
