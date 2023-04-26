@@ -142,55 +142,50 @@ function Chart() {
   return (
     <Box p={"2rem"}>
       <Text mb={"1rem"}>Quarterly sales figures</Text>
-
-      <ResponsiveContainer
-        height={"100%"}
-        width="90%"
-        backgroundColor={"red"}
-        aspect={3}
-      >
-        <LineChart
-          width={500}
-          height={800}
-          data={data}
+      <Flex>
+        <ResponsiveContainer
+          height={"100%"}
+          width="90%"
           backgroundColor={"red"}
-          margin={{
-            top: 15,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
+          aspect={3}
         >
-          <CartesianGrid horizontal="true" vertical="" stroke="#666d73" />
-          <XAxis dataKey="name" tick={{ fill: "#fff" }} />
-          <YAxis tick={{ fill: "#fff" }} />
-          <Tooltip
-            contentStyle={{ backgroundColor: "#fdb78b", color: "#fff" }}
-            itemStyle={{ color: "#fff" }}
-            cursor={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="revenues"
-            stroke="#fdb78b"
-            strokeWidth="5"
-            dot={{ fill: "#2e4355", stroke: "#fdb78b", strokeWidth: 2, r: 5 }}
-            activeDot={{
-              fill: "#2e4355",
-              stroke: "#fdb78b",
-              strokeWidth: 5,
-              r: 10,
+          <LineChart
+            width={500}
+            height={800}
+            data={data}
+            backgroundColor={"red"}
+            margin={{
+              top: 15,
+              right: 30,
+              left: 20,
+              bottom: 5,
             }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-      <ReactEcharts option={option} />
-
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart width={150} height={40} data={data2}>
-          <Bar dataKey="uv" fill="#fdb78b" />
-        </BarChart>
-      </ResponsiveContainer>
+          >
+            <CartesianGrid horizontal="true" vertical="" stroke="#666d73" />
+            <XAxis dataKey="name" tick={{ fill: "#fff" }} />
+            <YAxis tick={{ fill: "#fff" }} />
+            <Tooltip
+              contentStyle={{ backgroundColor: "#fdb78b", color: "#fff" }}
+              itemStyle={{ color: "#fff" }}
+              cursor={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="revenues"
+              stroke="#fdb78b"
+              strokeWidth="5"
+              dot={{ fill: "#2e4355", stroke: "#fdb78b", strokeWidth: 2, r: 5 }}
+              activeDot={{
+                fill: "#2e4355",
+                stroke: "#fdb78b",
+                strokeWidth: 5,
+                r: 10,
+              }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+        <ReactEcharts option={option} />
+      </Flex>
     </Box>
   );
 }

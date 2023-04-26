@@ -1,4 +1,14 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
 import React from "react";
 import Chart from "../components/Chart";
 import Profile from "../components/Profile";
@@ -30,7 +40,21 @@ const HomePage = () => {
         <CardEmployee />
         <CardFoodItem />
       </Flex>
-      <Chart />
+      <Tabs>
+        <TabList>
+          <Tab>Revenue</Tab>
+          <Tab>Charts</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <p>one!</p>
+          </TabPanel>
+          <TabPanel>
+            <Chart />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </Box>
   );
 };
