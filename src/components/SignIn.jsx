@@ -57,6 +57,8 @@ const SignIn = () => {
           setCookie("token", token);
           setCookie("id", user.adminid);
           setCookie("role", user.work_as);
+          setCookie("email", user.email);
+          setCookie("name", user.f_name);
           dispatch(getTokenHolder(token));
           dispatch(setCredential(user));
           dispatch(setLoader());
@@ -101,6 +103,9 @@ const SignIn = () => {
           setCookie("token", token);
           setCookie("id", user.id);
           setCookie("role", "Admin");
+          setCookie("email", user.email);
+          setCookie("name", user.username);
+
           dispatch(getTokenHolder(token));
           dispatch(setCredential(user));
           dispatch(setLoader());

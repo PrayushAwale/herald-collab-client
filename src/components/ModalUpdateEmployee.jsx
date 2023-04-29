@@ -15,12 +15,20 @@ import {
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setLoader } from "../features/loaderSlice";
-import { setModal } from "../features/modalSlice";
 import { GrClose } from "react-icons/gr";
 import getCookie from "../hooks/getCookie";
 import { queryClient } from "../App";
 
-const Modal = () => {
+const ModalUpdateEmployee = ({
+  f_name,
+  l_name,
+  password,
+  email,
+  work_as,
+  phone_number,
+  setIsActive,
+  id,
+}) => {
   const dispatch = useDispatch();
   const f_nameRef = useRef();
   const l_nameRef = useRef();
@@ -28,36 +36,38 @@ const Modal = () => {
   const emailRef = useRef();
   const work_asRef = useRef();
   const phone_numberRef = useRef();
-  const id = getCookie("id");
+  const adminid = getCookie("id");
   const toast = useToast();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       dispatch(setLoader());
       const body = {
+        id,
         f_name: f_nameRef.current.value,
         l_name: l_nameRef.current.value,
         password: passwordRef.current.value,
         email: emailRef.current.value,
         work_as: work_asRef.current.value,
         phone_number: phone_numberRef.current.value,
-        adminid: id,
+        adminid: adminid,
       };
       const response = await fetch(
-        "http://localhost:5500/employee/createemployee",
+        "http://localhost:5500/employee/updateemployee",
         {
-          method: "POST",
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }
       );
+
       if (response.ok) {
         dispatch(setLoader());
-        dispatch(setModal());
+        setIsActive((prev) => !prev);
         queryClient.invalidateQueries("getEmployees");
         toast({
-          title: "Added Sucessfully.",
-          description: "Sucessfully Added new employee.",
+          title: "Edited Sucessfully.",
+          description: "Sucessfully edited employee.",
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -77,7 +87,7 @@ const Modal = () => {
       top={0}
       left={0}
       zIndex={3}
-      onClick={() => dispatch(setModal())}
+      onClick={() => setIsActive((prev) => !prev)}
     >
       <Box
         pos={"relative"}
@@ -87,7 +97,7 @@ const Modal = () => {
         boxShadow={"0px 10px 15px -3px rgba(0,0,0,0.1)"}
         onClick={(e) => e.stopPropagation()}
       >
-        <Heading>Add Employee</Heading>
+        <Heading>Edit Employee</Heading>
         <FormControl my={"1rem"}>
           <SimpleGrid columns={2} spacing={5}>
             <Box>
@@ -99,6 +109,7 @@ const Modal = () => {
                 placeholder="Enter first name"
                 id="employeeName"
                 ref={f_nameRef}
+                defaultValue={f_name}
               />
             </Box>
             <Box>
@@ -110,6 +121,7 @@ const Modal = () => {
                 placeholder="Enter last name"
                 id="employeeName"
                 ref={l_nameRef}
+                defaultValue={l_name}
               />
             </Box>
             <Box>
@@ -121,6 +133,7 @@ const Modal = () => {
                 placeholder="Enter email"
                 id="employeeName"
                 ref={emailRef}
+                defaultValue={email}
               />
             </Box>
             <Box>
@@ -132,6 +145,7 @@ const Modal = () => {
                 placeholder="Enter phone number"
                 id="employeeName"
                 ref={phone_numberRef}
+                defaultValue={phone_number}
               />
             </Box>
             <Box>
@@ -143,11 +157,16 @@ const Modal = () => {
                 placeholder="Enter password"
                 id="employeeName"
                 ref={passwordRef}
+                defaultValue={password}
               />
             </Box>
             <Box>
               <FormLabel htmlFor="employeeName">Work as</FormLabel>
-              <Select placeholder="Select option" ref={work_asRef}>
+              <Select
+                placeholder="Select option"
+                ref={work_asRef}
+                defaultValue={work_as}
+              >
                 <option value="Waiter">Waiter</option>
                 <option value="Cashier">Cashier</option>
                 <option value="Cook">Cook</option>
@@ -163,7 +182,7 @@ const Modal = () => {
             boxShadow={"0px 5px 10px -3px rgba(0,0,0,0.1)"}
             onClick={handleSubmit}
           >
-            Add
+            Save
           </Button>
         </FormControl>
         <Icon
@@ -172,11 +191,11 @@ const Modal = () => {
           pos={"absolute"}
           top={"1rem"}
           right={"1rem"}
-          onClick={() => dispatch(setModal())}
+          onClick={() => setIsActive((prev) => !prev)}
         />
       </Box>
     </Center>
   );
 };
 
-export default Modal;
+export default ModalUpdateEmployee;

@@ -14,9 +14,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiSettings, FiLogOut, FiBell } from "react-icons/fi";
 import removeCookie from "../hooks/removeCookie";
 import { useNavigate } from "react-router-dom";
+import getCookie from "../hooks/getCookie";
 const Profile = () => {
   const dispatch = useDispatch();
-  const { username, email } = useSelector((state) => state.auth);
+  const email = getCookie("email");
+  const name = getCookie("name");
   const navigate = useNavigate();
   return (
     <>
@@ -39,7 +41,7 @@ const Profile = () => {
               <Avatar h={"2rem"} w={"2rem"} name={email} bg={"#eea551"} />
               <Flex direction={"column"}>
                 <Text color={"gray.500"}>{email}</Text>
-                <Text>{username}</Text>
+                <Text>{name.charAt(0).toUpperCase() + name.slice(1)}</Text>
               </Flex>
             </Flex>
           </MenuItem>

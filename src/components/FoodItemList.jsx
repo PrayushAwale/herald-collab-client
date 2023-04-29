@@ -1,15 +1,28 @@
 import { Flex, IconButton, SimpleGrid, Text, useToast } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { queryClient } from "../App";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../features/loaderSlice";
 
+import ModalFoodItem from "./ModalFoodItem";
+
 const FoodItemList = ({ food_name, category, price, id }) => {
+  const [isActive, setIsActive] = useState(false);
+  const alterIsActive = (value) => {
+    setIsActive(value);
+  };
   const dispatch = useDispatch();
   const toast = useToast();
-  const handleClick = async (e) => {
+
+  const handleModal = (e) => {
+    setIsActive(!isActive);
+    e.stopPropagation();
+  };
+
+  const handleClickDelete = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     try {
       dispatch(setLoader());
       const response = await fetch(
@@ -45,13 +58,25 @@ const FoodItemList = ({ food_name, category, price, id }) => {
       bg={"gray.100"}
       cursor={"pointer"}
       borderRadius={"1rem"}
+      onClick={handleModal}
+      alignItems={"center"}
     >
       <Text>{food_name}</Text>
       <Text>{price}</Text>
       <Flex justify={"space-between"} align={"center"}>
         <Text>{category}</Text>
-        <IconButton icon={<AiOutlineDelete />} onClick={handleClick} />
+        <IconButton icon={<AiOutlineDelete />} onClick={handleClickDelete} />
       </Flex>
+      {isActive && (
+        <ModalFoodItem
+          id={id}
+          food_name={food_name}
+          price={price}
+          category={category}
+          isActive={isActive}
+          alterIsActive={alterIsActive}
+        />
+      )}
     </SimpleGrid>
   );
 };

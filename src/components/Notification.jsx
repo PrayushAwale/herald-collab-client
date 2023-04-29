@@ -20,10 +20,7 @@ const Notification = () => {
     return res.json();
   };
 
-  const { data, error, isLoading } = useQuery("randomFacts", getFacts, {
-    // Refetch the data every 1 second = 1000 ms
-    refetchInterval: 1000,
-  });
+  const { data, error, isLoading } = useQuery("getNotifications", getFacts);
   return (
     <Menu>
       <Center>

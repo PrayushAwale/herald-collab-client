@@ -5,26 +5,6 @@ import { AiOutlineDashboard } from "react-icons/ai";
 
 const SideBar = () => {
   const linkStyles = {
-    // after: {
-    //   content: '""',
-    //   h: "2rem",
-    //   w: "2rem",
-    //   position: "absolute",
-    //   top: "-57.8%",
-    //   right: 0,
-    //   borderBottomRightRadius: "40%",
-    //   boxShadow: "7.5px 7.5px 0 7.5px #fff",
-    // },
-    // before: {
-    //   content: '""',
-    //   h: "2rem",
-    //   w: "2rem",
-    //   position: "absolute",
-    //   bottom: "-57.8%",
-    //   right: 0,
-    //   borderTopRightRadius: "40%",
-    //   boxShadow: "7.5px -7.5px 0 7.5px #fff",
-    // },
     link: {
       position: "relative",
       borderRadius: "100rem 0 0 100rem",
@@ -38,7 +18,6 @@ const SideBar = () => {
     },
   };
   return (
-    // <Box></Box>
     <Box
       h={"100vh"}
       w={"inherit"}

@@ -13,7 +13,7 @@ const CardEmployee = () => {
     "getTotalEmployees",
     getTotalEmployees
   );
-  console.log(data?.data);
+
   return (
     <Box bg={"gray.100"} p={"2rem"} borderRadius={"1rem"} flex={1}>
       <Text color={"gray.600"}>Total Numbers of Employees</Text>

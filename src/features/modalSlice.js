@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isActive: false,
   isActiveItem: false,
+  isActiveUpdateItme: false,
 };
 
 const modalSlice = createSlice({
@@ -16,8 +17,13 @@ const modalSlice = createSlice({
     setModalItem: (state, action) => {
       state.isActiveItem = !state.isActiveItem;
     },
+
+    setModalUpdateItem: (state, action) => {
+      state.isActiveUpdateItme = !state.isActiveUpdateItme;
+    },
   },
 });
 
 export default modalSlice.reducer;
-export const { setModal, setModalItem } = modalSlice.actions;
+export const { setModal, setModalItem, setModalUpdateItem } =
+  modalSlice.actions;

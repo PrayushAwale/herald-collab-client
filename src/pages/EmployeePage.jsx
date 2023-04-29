@@ -34,7 +34,7 @@ const EmployeePage = () => {
       <Box p={"2rem 5rem"}>
         <Flex align={"center"} justify={"space-between"} pb={"1rem"}>
           <Flex w={"100%"} align={"center"} justify={"space-between"}>
-            <Heading>The Orders</Heading>
+            <Heading>Employees</Heading>
             <Flex align={"center"} gap={"2rem"}>
               <Button onClick={() => dispatch(setModal())}>Add</Button>
               <Profile />

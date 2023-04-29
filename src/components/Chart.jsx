@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import ReactEcharts from "echarts-for-react";
 import {
   LineChart,
@@ -8,10 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
-  Bar,
-  Cell,
-  Legend,
 } from "recharts";
 
 function Chart() {
@@ -140,15 +136,9 @@ function Chart() {
     ],
   };
   return (
-    <Box p={"2rem"}>
-      <Text mb={"1rem"}>Quarterly sales figures</Text>
+    <Box height={"11rem"}>
       <Flex>
-        <ResponsiveContainer
-          height={"100%"}
-          width="90%"
-          backgroundColor={"red"}
-          aspect={3}
-        >
+        <ResponsiveContainer width="90%" backgroundColor={"red"} aspect={3}>
           <LineChart
             width={500}
             height={800}
@@ -191,15 +181,3 @@ function Chart() {
 }
 
 export default Chart;
-
-// background color: #132737; (Goes on the index.css)
-
-// text color: #fff (white)
-
-// Horizontal Grid Color: #243240
-
-// chart line color : #2e4355
-
-// Data point Dot Fill color : #2e4355
-
-// Data point Dot Stroke  color (dot outline outline) : #8884d8

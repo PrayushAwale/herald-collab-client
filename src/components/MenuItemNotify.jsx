@@ -1,5 +1,6 @@
 import { Flex, MenuItem, Text } from "@chakra-ui/react";
 import React from "react";
+import { queryClient } from "../App";
 
 const MenuItemNotify = ({ food_name, table_number, id, isServed }) => {
   const handleCheck = async () => {
@@ -13,6 +14,9 @@ const MenuItemNotify = ({ food_name, table_number, id, isServed }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      if (response.ok) {
+        queryClient.invalidateQueries("getNotifications");
+      }
     } catch (err) {
       console.error(err.message);
     }
