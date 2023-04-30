@@ -60,6 +60,8 @@ const BillingOrderList = ({
         <Text w={"33rem"}>{food_name}</Text>
         <Flex justify={"space-between"} w={"100%"}>
           <Text>{quantity}</Text>
+          <Text>Rs.{price}</Text>
+          <Text>Rs.{price * quantity}</Text>
           <Text> {table_number} </Text>
           <Text
             p={"0.1rem 0.8rem"}

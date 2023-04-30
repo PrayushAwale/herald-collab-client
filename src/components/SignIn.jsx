@@ -187,7 +187,7 @@ const SignIn = () => {
           </Box>
           <Box>
             <FormLabel htmlFor="employeeName">Work as</FormLabel>
-            <Select placeholder="Select option" ref={work_asRef}>
+            <Select placeholder="Admin" ref={work_asRef}>
               <option value={"true"}>Employee</option>
             </Select>
           </Box>

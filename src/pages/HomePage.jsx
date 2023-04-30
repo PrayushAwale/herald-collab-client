@@ -27,7 +27,6 @@ const HomePage = () => {
     return res.json();
   };
   const { data, error, isLoading } = useQuery("getSales", getSales);
-  console.log(data && data);
 
   return (
     <Box h={"100vh"} w={"100%"} px={"2rem"}>
@@ -52,13 +51,13 @@ const HomePage = () => {
         >
           Hello,
         </Text>{" "}
-        {user.charAt(0).toUpperCase() + user.slice(1)}!
+        {user && user.charAt(0).toUpperCase() + user.slice(1)}!
       </Heading>
 
       <Flex align={"center"} p={"2rem 1rem"} gap={"1rem"}>
         <CardEmployee />
         <CardFoodItem />
-        <CardSales />
+        <CardSales dataLength={data && data.data} />
       </Flex>
       <Tabs>
         <TabList>
@@ -98,6 +97,7 @@ const HomePage = () => {
                       p={"1rem  0.5rem"}
                       bg={"gray.100"}
                       borderRadius={"0.5rem"}
+                      key={item.id}
                     >
                       <Text>{item.food_name}</Text>
                       <Text>{item.price}</Text>

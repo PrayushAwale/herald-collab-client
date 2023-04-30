@@ -52,9 +52,12 @@ const SignUp = () => {
       if (response.ok) {
         const data = await response.json();
         const { token, user } = data;
+
         setCookie("token", token);
         setCookie("id", user.id);
         setCookie("role", "Admin");
+        setCookie("email", user.email);
+        setCookie("name", user.username);
         dispatch(getTokenHolder(data));
         dispatch(setCredential(user));
         dispatch(setLoader());

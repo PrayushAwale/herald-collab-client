@@ -40,6 +40,8 @@ const BillingPage = () => {
           <Text w={"33rem"}>Food Name</Text>
           <Flex justify={"space-between"} w={"100%"}>
             <Text>Quantity</Text>
+            <Text>Price</Text>
+            <Text>Sub Total</Text>
             <Text>Table Number</Text>
             <Text>Status</Text>
           </Flex>

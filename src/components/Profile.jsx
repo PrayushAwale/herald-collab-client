@@ -41,14 +41,10 @@ const Profile = () => {
               <Avatar h={"2rem"} w={"2rem"} name={email} bg={"#eea551"} />
               <Flex direction={"column"}>
                 <Text color={"gray.500"}>{email}</Text>
-                <Text>{name.charAt(0).toUpperCase() + name.slice(1)}</Text>
+                <Text>
+                  {name && name.charAt(0).toUpperCase() + name.slice(1)}
+                </Text>
               </Flex>
-            </Flex>
-          </MenuItem>
-          <MenuItem>
-            <Flex align={"center"} gap={"0.5rem"}>
-              <FiSettings />
-              <Text>Setting</Text>
             </Flex>
           </MenuItem>
           <MenuItem
@@ -56,6 +52,8 @@ const Profile = () => {
               removeCookie("token");
               removeCookie("id");
               removeCookie("role");
+              removeCookie("name");
+              removeCookie("email");
               navigate("/");
             }}
           >
