@@ -22,12 +22,16 @@ const BillingOrderList = ({
       const body = {
         id,
         isBilled: !isBilled,
+        table_number,
       };
-      const response = await fetch("http://localhost:5500/order/createBill", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "http://localhost:5500/order/createBillWithTxt",
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         dispatch(setLoader());
