@@ -54,7 +54,7 @@ const ModalItem = () => {
         queryClient.invalidateQueries("getFoodItems");
         toast({
           title: "Added Sucessfully.",
-          description: "Sucessfully Added new employee.",
+          description: "Sucessfully Added new food item.",
           status: "success",
           duration: 5000,
           isClosable: true,

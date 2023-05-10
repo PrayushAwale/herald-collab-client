@@ -62,8 +62,8 @@ const ModalFoodItem = ({
         alterIsActive(!isActive);
         queryClient.invalidateQueries("getFoodItems");
         toast({
-          title: "Added Sucessfully.",
-          description: "Sucessfully Added new employee.",
+          title: "Edit Sucessfully.",
+          description: "Sucessfully edit the food item",
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -139,7 +139,6 @@ const ModalFoodItem = ({
               </Select>
             </Box>
           </VStack>
-
           <Button
             mt={"1rem"}
             bg={"#eea551"}
