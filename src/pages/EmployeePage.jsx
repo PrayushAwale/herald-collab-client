@@ -55,7 +55,7 @@ const EmployeePage = () => {
           <Text>Email</Text>
           <Text>Phone</Text>
           <Text>Position</Text>
-          <Text>Joine On</Text>
+          <Text>Joined On</Text>
         </SimpleGrid>
         <VStack p={"1rem 0.5rem"} align={"stretch"} spacing={"1rem"}>
           {data &&

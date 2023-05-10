@@ -57,7 +57,7 @@ const Modal = () => {
         queryClient.invalidateQueries("getEmployees");
         toast({
           title: "Added Sucessfully.",
-          description: "Sucessfully Added new employee.",
+          description: "Sucessfully added new employee.",
           status: "success",
           duration: 5000,
           isClosable: true,

@@ -36,7 +36,7 @@ const EmployeeList = ({
         queryClient.invalidateQueries("getEmployees");
         toast({
           title: "Deleted Sucessfully.",
-          description: "Sucessfully deleted the food item",
+          description: "Sucessfully deleted the employee",
           status: "success",
           duration: 5000,
           isClosable: true,

@@ -18,6 +18,7 @@ import CardFoodItem from "../components/CardFoodItem";
 import getCookie from "../hooks/getCookie";
 import { useQuery } from "react-query";
 import CardSales from "../components/CardSales";
+import Note from "../components/Note";
 
 const HomePage = () => {
   const user = getCookie("name");
@@ -29,7 +30,7 @@ const HomePage = () => {
   const { data, error, isLoading } = useQuery("getSales", getSales);
 
   return (
-    <Box h={"100vh"} w={"100%"} px={"2rem"}>
+    <Box h={"100vh"} w={"100%"} px={"2rem"} position={"relative"}>
       <Flex
         p={"2rem 3rem"}
         align={"center"}
@@ -113,6 +114,7 @@ const HomePage = () => {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <Note />
     </Box>
   );
 };

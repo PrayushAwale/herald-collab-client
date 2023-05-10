@@ -136,7 +136,7 @@ function Chart() {
     ],
   };
   return (
-    <Box height={"11rem"}>
+    <Box maxH={"20rem"}>
       <Flex>
         <ResponsiveContainer width="90%" backgroundColor={"red"} aspect={3}>
           <LineChart
